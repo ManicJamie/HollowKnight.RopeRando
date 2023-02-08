@@ -1,3 +1,3 @@
-# RandomRandoAddons
+# RopeRando
 
-A mod for the game Hollow Knight.
+Quite literally just adds the rope in the watcher knights tower to randomizer.

@@ -6,7 +6,7 @@ using ItemChanger.Util;
 
 namespace RopeRando.IC
 {
-    public class RopeLocation : ExistingContainerLocation
+    public class RopeLocation : AutoLocation
     {
         public string objectName;
 

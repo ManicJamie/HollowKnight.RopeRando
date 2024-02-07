@@ -5,64 +5,34 @@ using RandomizerMod.RC;
 using RandomizerCore.Logic;
 using RandomizerCore.LogicItems;
 using RandomizerMod.Settings;
+using MenuChanger;
 
 namespace RopeRando.IC
 {
-    internal class ICManager
+    public static class ICManager
     {
-        public void RegisterItemsAndLocations()
+        public static RopeLocation ropeLocation = new()
         {
-            RopeLocation ropeLocation = new()
-            {
-                objectName = "chandelier",
-                sceneName = SceneNames.Ruins2_03,
-                name = "chandelierLocation",
-                nonreplaceable = true
-            };
+            objectName = "chandelier",
+            sceneName = SceneNames.Ruins2_03,
+            name = Consts.LocationName
+        };
 
-            RopeItem ropeItem = new()
+        public static RopeItem ropeItem = new()
+        {
+            name = Consts.ItemName,
+            UIDef = new MsgUIDef
             {
-                name = "chandelierItem",
-                UIDef = new MsgUIDef
-                {
-                    name = new BoxedString("WK Chandelier Cut"),
-                    shopDesc = new BoxedString("Call in Del-Boy to do some maintenance on the Watcher Knights' chandelier."),
-                    sprite = new ItemChangerSprite("ShopIcons.Downslash") // TODO: change this
-                }
-            };
+                name = new BoxedString("WK Chandelier Cut"),
+                shopDesc = new BoxedString("Call in Del-Boy to do some maintenance on the Watcher Knights' chandelier."),
+                sprite = new ItemChangerSprite("ShopIcons.Downslash") // TODO: change this
+            }
+        };
 
-            Finder.DefineCustomLocation(ropeLocation);
+        public static void DefineItemLoc()
+        {
             Finder.DefineCustomItem(ropeItem);
-        }
-
-        public void Hook()
-        {
-            RCData.RuntimeLogicOverride.Subscribe(0, ApplyLogic);
-            RequestBuilder.OnUpdate.Subscribe(0.3f, AddRope);
-
-            On.UIManager.StartNewGame += UIManager_StartNewGame;
-        }
-
-        private void AddRope(RequestBuilder rb)
-        {
-            rb.AddItemByName("chandelierItem");
-            rb.AddLocationByName("chandelierLocation");
-        }
-
-        private void ApplyLogic(GenerationSettings gs, LogicManagerBuilder lmb)
-        {
-            lmb.AddItem(new EmptyItem("chandelierItem"));
-            lmb.AddLogicDef(new("chandelierLocation", "Ruins2_03[bot1] + CLAW"));
-        }
-
-        private void UIManager_StartNewGame(On.UIManager.orig_StartNewGame orig, UIManager self, bool permaDeath, bool bossRush)
-        {
-            orig(self, permaDeath, bossRush);
-
-            ItemChangerMod.CreateSettingsProfile(false);
-
-            AbstractPlacement placement = Finder.GetLocation("chandelierLocation").Wrap();
-            ItemChangerMod.AddPlacements(new List<AbstractPlacement>() { placement });
+            Finder.DefineCustomLocation(ropeLocation);
         }
     }
 }

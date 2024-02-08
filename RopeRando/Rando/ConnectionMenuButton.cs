@@ -5,25 +5,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ItemChanger;
 
 namespace RopeRando.Rando
 {
     static class ConnectionMenuButton
     {
+        public static SmallButton? button;
+
+        public static void UpdateButtonColor()
+        {
+            button.Text.color = RopeRando.Instance.settings.Enabled ? Colors.TRUE_COLOR : Colors.DEFAULT_COLOR;
+        }
+
         public static bool Build(MenuPage landingPage, out SmallButton settingsButton)
         {
-            var button = new SmallButton(landingPage, "Rope Rando");
-            var settings = RopeRando.Instance.settings;
-
-            void UpdateButtonColor()
-            {
-                button.Text.color = settings.Enabled ? Colors.TRUE_COLOR : Colors.DEFAULT_COLOR;
-            }
+            button = new SmallButton(landingPage, "Rope Rando");
 
             UpdateButtonColor();
             button.OnClick += () =>
             {
-                settings.Enabled = !settings.Enabled;
+                RopeRando.Instance.settings.Enabled = !RopeRando.Instance.settings.Enabled;
                 UpdateButtonColor();
             };
             settingsButton = button;

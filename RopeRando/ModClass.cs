@@ -46,7 +46,11 @@ namespace RopeRando
         private void HookRSM()
         {
             RandoSettingsManager.RandoSettingsManagerMod.Instance.RegisterConnection(
-                new RandoSettingsManagerProxy(() => settings, rs => settings = rs));
+                new RandoSettingsManagerProxy(() => Instance.settings,
+                rs => {
+                    Instance.settings = rs;
+                    ConnectionMenuButton.UpdateButtonColor(); 
+                }));
         }
 
         public ConnectionSettings settings = new();

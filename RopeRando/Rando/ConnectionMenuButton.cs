@@ -15,6 +15,7 @@ namespace RopeRando.Rando
 
         public static void UpdateButtonColor()
         {
+            if (button is null) { return; }
             button.Text.color = RopeRando.Instance.settings.Enabled ? Colors.TRUE_COLOR : Colors.DEFAULT_COLOR;
         }
 

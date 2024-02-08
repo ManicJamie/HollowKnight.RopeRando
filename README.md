@@ -1,3 +1,3 @@
-# Randomizes the Watcher Knights rope in Randomizer 4.
+# Rope Rando
 
-This mod is unmaintained and will break the randomizer hash. @ManicJamie is working on a fork.
+Randomizes the rope holding the chandelier in the Watcher Knights arena.

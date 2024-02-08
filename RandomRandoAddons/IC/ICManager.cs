@@ -9,34 +9,43 @@ using MenuChanger;
 using ItemChanger.Tags;
 using UnityEngine.UIElements;
 using System.Numerics;
+using UnityEngine;
+using ItemChanger.Internal;
+using System.Reflection;
+using System.IO;
 
 namespace RopeRando.IC
 {
     public static class ICManager
     {
-        public static RopeLocation ropeLocation = new()
+        internal static ChandelierSprite chandelierSprite = new();
+
+        private static readonly RopeLocation ropeLocation = new()
         {
             sceneName = SceneNames.Ruins2_03,
             name = Consts.LocationName
         };
 
-        public static RopeItem ropeItem = new()
+        private static RopeItem RopeItem()
         {
-            name = Consts.ItemName,
-            UIDef = new MsgUIDef
+            return new()
             {
-                name = new BoxedString("WK Chandelier Cut"),
-                shopDesc = new BoxedString("Call in Del-Boy to do some maintenance on the Watcher Knights' chandelier."),
-                sprite = new ItemChangerSprite("ShopIcons.Downslash") // TODO: change this
-            }
-        };
+                name = Consts.ItemName,
+                UIDef = new MsgUIDef
+                {
+                    name = new BoxedString("WK Chandelier Cut"),
+                    shopDesc = new BoxedString("Call in Del-Boy to do some maintenance on the Watcher Knights' chandelier."),
+                    sprite = chandelierSprite
+                }
+            };
+        }
 
         /// <summary>
         /// Define the items & locations we are adding
         /// </summary>
         public static void DefineItemLoc()
         {
-            Finder.DefineCustomItem(ropeItem);
+            Finder.DefineCustomItem(RopeItem());
 
             ropeLocation.AddTag(LocationMetadataTag());
             Finder.DefineCustomLocation(ropeLocation);
@@ -56,6 +65,7 @@ namespace RopeRando.IC
             {
                 (SceneNames.Ruins2_03, -0.1f, 0.6f)
             };
+            // t.Properties["LocationPinSprite"] = chandelierSprite; // Doesn't appear to work (and if it did, this isn't a suitable pin sprite regardless)
             return t;
         }
     }

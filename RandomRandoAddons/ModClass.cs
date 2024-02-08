@@ -14,9 +14,11 @@ namespace RopeRando
     public class RopeRando : Mod, IGlobalSettings<ConnectionSettings>
     {
         private static RopeRando _instance;
-        public static RopeRando Instance { get { _instance ??= new(); return _instance; } }        
+        public static RopeRando Instance { get { _instance ??= new(); return _instance; } }
 
-        public override string GetVersion() => "v1.0";
+        static RopeRando() { _instance ??= new(); }
+
+        public override string GetVersion() => GetType().Assembly.GetName().Version.ToString();
         public override void Initialize()
         {
             Log("Initializing...");
@@ -32,8 +34,19 @@ namespace RopeRando
             SettingsLog.AfterLogSettings += RandoManager.LogRandoSettings;
 
             RandomizerMenuAPI.AddMenuPage(_ => { }, ConnectionMenuButton.Build);
+
+            if (ModHooks.GetMod("RandoSettingsManager") != null)
+            {
+                HookRSM();
+            }
             
             Log("Initialized.");
+        }
+
+        private void HookRSM()
+        {
+            RandoSettingsManager.RandoSettingsManagerMod.Instance.RegisterConnection(
+                new RandoSettingsManagerProxy(() => settings, rs => settings = rs));
         }
 
         public ConnectionSettings settings = new();

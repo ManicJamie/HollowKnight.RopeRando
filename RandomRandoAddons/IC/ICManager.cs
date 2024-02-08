@@ -6,6 +6,9 @@ using RandomizerCore.Logic;
 using RandomizerCore.LogicItems;
 using RandomizerMod.Settings;
 using MenuChanger;
+using ItemChanger.Tags;
+using UnityEngine.UIElements;
+using System.Numerics;
 
 namespace RopeRando.IC
 {
@@ -13,7 +16,6 @@ namespace RopeRando.IC
     {
         public static RopeLocation ropeLocation = new()
         {
-            objectName = "chandelier",
             sceneName = SceneNames.Ruins2_03,
             name = Consts.LocationName
         };
@@ -29,10 +31,32 @@ namespace RopeRando.IC
             }
         };
 
+        /// <summary>
+        /// Define the items & locations we are adding
+        /// </summary>
         public static void DefineItemLoc()
         {
             Finder.DefineCustomItem(ropeItem);
+
+            ropeLocation.AddTag(LocationMetadataTag());
             Finder.DefineCustomLocation(ropeLocation);
+        }
+
+        /// <summary>
+        /// Creates the location tag used for RandoMapMod
+        /// </summary>
+        private static Tag LocationMetadataTag()
+        {
+            var t = new InteropTag
+            {
+                Message = "RandoSupplementalMetadata"
+            };
+            t.Properties["ModSource"] = nameof(RopeRando);
+            t.Properties["MapLocations"] = new (string, float, float)[]
+            {
+                (SceneNames.Ruins2_03, -0.1f, 0.6f)
+            };
+            return t;
         }
     }
 }

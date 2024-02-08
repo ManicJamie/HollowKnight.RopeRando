@@ -8,6 +8,6 @@ namespace RopeRando
 {
     public class ConnectionSettings
     {
-        public bool Enabled;
+        public bool Enabled = false;
     }
 }

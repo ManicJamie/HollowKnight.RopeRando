@@ -3,21 +3,30 @@ using ItemChanger.Locations;
 using ItemChanger;
 using Satchel;
 using ItemChanger.Util;
+using ItemChanger.Tags;
+using System.Numerics;
 
 namespace RopeRando.IC
 {
     public class RopeLocation : AutoLocation
     {
-        public string objectName;
+        // Since we're modifying a specific FSM on a specific scene, it makes sense to define those here
+        const string chand_sceneName = SceneNames.Ruins2_03;
+        public static readonly FsmID fsmID = new("chandelier", "Control");
+
+        public RopeLocation()
+        {
+            sceneName = SceneNames.Ruins2_03;
+        }
 
         protected override void OnLoad()
         {
-            Events.AddFsmEdit(sceneName, new(objectName, "Control"), ModifyRopeBehaviour);
+            Events.AddFsmEdit(chand_sceneName, fsmID, ModifyRopeBehaviour);
         }
 
         protected override void OnUnload()
         {
-            Events.RemoveFsmEdit(sceneName, new(objectName, "Control"), ModifyRopeBehaviour);
+            Events.RemoveFsmEdit(chand_sceneName, fsmID, ModifyRopeBehaviour);
         }
 
         private void ModifyRopeBehaviour(PlayMakerFSM fsm)

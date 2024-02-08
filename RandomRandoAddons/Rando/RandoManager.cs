@@ -1,13 +1,10 @@
-﻿using ItemChanger;
-using MenuChanger;
-using RandomizerCore;
+﻿using RandomizerCore;
 using RandomizerCore.Logic;
 using RandomizerCore.LogicItems;
 using RandomizerMod.Logging;
 using RandomizerMod.RandomizerData;
 using RandomizerMod.RC;
 using RandomizerMod.Settings;
-using RopeRando.IC;
 using System;
 using System.Collections.Generic;
 using System.IO;

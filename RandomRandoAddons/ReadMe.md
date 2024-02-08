@@ -1,3 +1,7 @@
 # RopeRando
 
-Quite literally just adds the rope in the watcher knights tower to randomizer.
+Quite literally just adds the chandelier
+
+## TODO:
+- [ ] Vanilla def?
+- [ ] Switch to container

@@ -8,20 +8,21 @@ using System.IO;
 using RandomizerMod.RC;
 using RopeRando.IC;
 using RopeRando.Rando;
+using RandoSettingsManager.SettingsManagement;
 
 namespace RopeRando
 {
     public class RopeRando : Mod, IGlobalSettings<ConnectionSettings>
     {
-        private static RopeRando _instance;
-        public static RopeRando Instance { get { _instance ??= new(); return _instance; } }
-
-        static RopeRando() { _instance ??= new(); }
+        private static RopeRando? _instance;
+        public static RopeRando Instance { get => _instance!; }
 
         public override string GetVersion() => GetType().Assembly.GetName().Version.ToString();
         public override void Initialize()
         {
             Log("Initializing...");
+
+            _instance = this;
 
             // Define items for IC
             ICManager.DefineItemLoc();
@@ -45,20 +46,25 @@ namespace RopeRando
 
         private void HookRSM()
         {
-            RandoSettingsManager.RandoSettingsManagerMod.Instance.RegisterConnection(
-                new RandoSettingsManagerProxy(() => Instance.settings,
-                rs => {
-                    Instance.settings = rs;
-                    ConnectionMenuButton.UpdateButtonColor(); 
-                }));
+            RandoSettingsManager.RandoSettingsManagerMod.Instance.RegisterConnection(new SimpleSettingsProxy<ConnectionSettings>(
+                this,
+                (st) =>
+                {
+                    if (st is null)
+                    {
+                        settings.Enabled = false;
+                    } else
+                    {
+                        settings = st;
+                    }
+                },
+                () => { return settings.Enabled ? settings : null; }
+                ));
         }
 
         public ConnectionSettings settings = new();
 
-        public void OnLoadGlobal(ConnectionSettings s)
-        {
-            settings = s;
-        }
+        public void OnLoadGlobal(ConnectionSettings s) => settings = s;
 
         public ConnectionSettings OnSaveGlobal() => settings;
     }

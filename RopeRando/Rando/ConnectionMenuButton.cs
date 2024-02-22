@@ -23,7 +23,7 @@ namespace RopeRando.Rando
         {
             button = new SmallButton(landingPage, "Rope Rando");
 
-            UpdateButtonColor();
+            landingPage.BeforeShow += UpdateButtonColor;
             button.OnClick += () =>
             {
                 RopeRando.Instance.settings.Enabled = !RopeRando.Instance.settings.Enabled;

@@ -1,16 +1,10 @@
-﻿using RandomizerCore;
-using RandomizerCore.Logic;
+﻿using RandomizerCore.Logic;
 using RandomizerCore.LogicItems;
 using RandomizerMod.Logging;
 using RandomizerMod.RandomizerData;
 using RandomizerMod.RC;
 using RandomizerMod.Settings;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RopeRando.Rando
 {

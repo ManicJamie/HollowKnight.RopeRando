@@ -3,8 +3,6 @@ using ItemChanger.Locations;
 using ItemChanger;
 using Satchel;
 using ItemChanger.Util;
-using ItemChanger.Tags;
-using System.Numerics;
 
 namespace RopeRando.IC
 {

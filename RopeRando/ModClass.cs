@@ -1,10 +1,6 @@
 ﻿using Modding;
 using RandomizerMod.Menu;
-using MenuChanger;
-using MenuChanger.MenuElements;
 using RandomizerMod.Logging;
-using RandomizerMod.RandomizerData;
-using System.IO;
 using RandomizerMod.RC;
 using RopeRando.IC;
 using RopeRando.Rando;

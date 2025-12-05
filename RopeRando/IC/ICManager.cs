@@ -1,18 +1,6 @@
-﻿using System.Collections.Generic;
-using ItemChanger.UIDefs;
+﻿using ItemChanger.UIDefs;
 using ItemChanger;
-using RandomizerMod.RC;
-using RandomizerCore.Logic;
-using RandomizerCore.LogicItems;
-using RandomizerMod.Settings;
-using MenuChanger;
 using ItemChanger.Tags;
-using UnityEngine.UIElements;
-using System.Numerics;
-using UnityEngine;
-using ItemChanger.Internal;
-using System.Reflection;
-using System.IO;
 
 namespace RopeRando.IC
 {

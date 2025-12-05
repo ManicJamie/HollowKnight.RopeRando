@@ -9,15 +9,10 @@ namespace RopeRando.IC
 {
     internal class ChandelierSprite : ISprite
     {
-        [JsonIgnore] private Sprite _value;
-        [JsonIgnore] public Sprite Value { get => _value; }
+        [JsonIgnore] private Sprite? _value;
+        [JsonIgnore] public Sprite Value { get => _value ??= LoadSprite("chandelier.png"); }
         
         public ISprite Clone() => (ISprite)MemberwiseClone();
-
-        public ChandelierSprite()
-        {
-            _value = LoadSprite("chandelier.png");
-        }
 
         private static Sprite LoadSprite(string name)
         {

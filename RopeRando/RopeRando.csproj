@@ -1,7 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <!-- Change this to the path of your modded HK installation -->
-    <HollowKnightRefs>E:/SteamLibrary/steamapps/common/Hollow Knight/hollow_knight_Data/Managed/</HollowKnightRefs>
     <!-- Change this to the path where you want the ready-to-upload exports to be -->
     <ExportDir>Export/</ExportDir>
     <!-- Uncomment this to generate a documentation file to be included with the mod -->
@@ -15,8 +13,8 @@
     <Product>RopeRando</Product>
     <Description>Rando 4 Connection for Watcher Knights' chandelier</Description>
     <Copyright>Copyright ©  2023</Copyright>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <FileVersion>1.1.1.0</FileVersion>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <FileVersion>1.1.2.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <LangVersion>latest</LangVersion>
 	  <Nullable>enable</Nullable>
